@@ -29,19 +29,19 @@ This is a **multi-label** problem—each image can belong to multiple defect cla
 
 ---
 
-##  Normalization & Preprocessing
+## Normalization & Preprocessing
+
 All images are normalized using dataset-wide statistics:
 
-\[
-x^\* = \frac{x - \mu}{\sigma}
-\]
+$$x^\* = \frac{x - \mu}{\sigma}$$
 
 This ensures compatibility with evaluation environments and stable model training.
 
-Additional preprocessing steps:
-- Resizing images
-- Data augmentation (flips, rotations, contrast changes)
-- PyTorch `Dataset` and `DataLoader` setup
+Additional preprocessing steps include:
+
+- Resizing images  
+- Data augmentation (flips, rotations, contrast changes)  
+- PyTorch `Dataset` and `DataLoader` setup  
 
 ---
 

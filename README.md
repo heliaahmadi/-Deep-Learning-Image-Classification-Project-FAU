@@ -1,6 +1,5 @@
 # DL Exercise 4 — PyTorch & Classification Challenge  
 *(Based on the FAU Pattern Recognition Lab materials)*  
-:contentReference[oaicite:0]{index=0}
 
 ##  Overview
 This exercise introduces students to **PyTorch**, modern deep learning practices, and real-world multi-label image classification.  

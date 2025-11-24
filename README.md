@@ -1,81 +1,85 @@
-# DL Exercise 4 — PyTorch & Classification Challenge  
-*(Based on the FAU Pattern Recognition Lab materials)*  
+# Solar Panel Defect Classification using PyTorch  
+This project focuses on building a deep learning model for **multi-label image classification** on a dataset of solar panel images. The goal is to automatically detect different types of defects—such as cracks and inactive regions—using a convolutional neural network implemented in **PyTorch**.
 
-##  Overview
-This exercise introduces students to **PyTorch**, modern deep learning practices, and real-world multi-label image classification.  
-You will implement, train, and evaluate a variation of the **ResNet** architecture on a dataset of solar-panel defects.
-
-The project consists of two main parts:
-
-1. **Mandatory** — Implement, train, and submit a PyTorch model  
-2. **Optional** — A challenge to build the *best* model and compete with classmates  
+The dataset consists of real-world solar module images, where each panel can contain **zero, one, or multiple defects**, making this a multi-label classification task.  
 
 ---
 
-##  Goals  
-- Learn the basics of **PyTorch** and tensor-based computation  
-- Implement & train a **ResNet-like architecture**  
-- Perform **multi-label image classification** on solar module images  
-- Compete in a friendly deep learning challenge with peers
+##  Project Overview
+The project explores:
+- Designing and training a custom **ResNet-based architecture**
+- Applying proper image **normalization**, preprocessing, and data loading
+- Using **GPU-accelerated training** via PyTorch
+- Evaluating performance with metrics suited for multi-label problems (e.g., F1 score)
+
+The primary objective is to build a reliable defect-detection model and experiment with architectural choices, regularization strategies, and data augmentation to improve generalization.
 
 ---
 
-##  Dataset: Solar Panel Defect Classification
+##  Dataset
+The dataset contains solar module images showing:
+- Cracks  
+- Inactive regions  
+- Combinations of both  
+- Undamaged panels  
 
-Solar modules:
-- Contain many cells  
-- Can degrade due to wind, transport, hail, etc.  
-- Show various defect types (e.g., **cracks**, **inactive regions**)  
-- Each panel may have **zero, one, or multiple defects → multi-label classification**
+Images come from real solar installations and reflect natural variations such as lighting, degradation, and structure.
 
-Examples (see page 8 of PDF):  
-- Crack on polycrystalline module  
-- Inactive region  
-- Combined cracks & inactive regions  
+This is a **multi-label** problem—each image can belong to multiple defect classes.
 
 ---
 
-##  Normalization Requirements
-Your preprocessing must exactly match the server normalization:
+##  Normalization & Preprocessing
+All images are normalized using dataset-wide statistics:
 
-For each pixel \( x \):
 \[
 x^\* = \frac{x - \mu}{\sigma}
 \]
 
-Where:
-- \( \mu \): global mean provided in the exercise  
-- \( \sigma \): global standard deviation  
+This ensures compatibility with evaluation environments and stable model training.
 
- **Important**: If your normalization differs, the server evaluation will be wrong.
-
----
-
-##  About PyTorch
-You will train your model using **PyTorch**, a widely-used deep learning framework:
-
-- Open-source  
-- Tensor-based computation similar to NumPy  
-- Dynamic computation graphs  
-- Autograd for backpropagation  
-- GPU acceleration  
-- Rich ecosystem and documentation  
-  - 60-min blitz  
-  - PyTorch tutorials  
-  - Examples and notebooks  
+Additional preprocessing steps:
+- Resizing images
+- Data augmentation (flips, rotations, contrast changes)
+- PyTorch `Dataset` and `DataLoader` setup
 
 ---
 
-##  The Challenge
-Improve the baseline ResNet by experimenting with:
+##  Model Architecture
+The core model is a **ResNet-style convolutional neural network** implemented from scratch in PyTorch.  
 
--  Architecture design  
--  Pretraining  
--  Regularization techniques  
--  Data augmentation  
-
-
+Key features:
+- Residual blocks
+- Global average pooling
+- Multi-label sigmoid output layer
+- Optional dropout and batch normalization
+- Customizable depth and width
 
 ---
 
+##  Training Pipeline
+The training loop includes:
+- Multi-label loss functions (e.g., BCEWithLogitsLoss)
+- Optimizers (Adam / SGD)
+- Learning rate scheduling
+- Periodic validation
+- Checkpoint saving for best model performance
 
+The model is evaluated with:
+- Precision  
+- Recall  
+- F1 score (macro/micro)  
+- Per-class metrics  
+
+---
+
+##  Results & Experiments
+Throughout the project, different strategies were explored to improve accuracy and robustness, including:
+- Data augmentation
+- Architectural refinements
+- Regularization (dropout, weight decay)
+- Pretraining vs. training from scratch
+
+The best-performing model achieved strong mean F1 scores on validation data.
+
+---

@@ -1,85 +1,83 @@
-# Solar Panel Defect Classification using PyTorch  
-This project focuses on building a deep learning model for **multi-label image classification** on a dataset of solar panel images. The goal is to automatically detect different types of defects—such as cracks and inactive regions—using a convolutional neural network implemented in **PyTorch**.
+# Solar Panel Defect Classification (PyTorch)
 
-The dataset consists of real-world solar module images, where each panel can contain **zero, one, or multiple defects**, making this a multi-label classification task.  
+A deep learning project for **multi-label classification** of solar panel defects using a custom **ResNet-based CNN** in PyTorch. The goal is to detect two defect types:
+- **Cracks**
+- **Inactive regions**
 
----
-
-##  Project Overview
-The project explores:
-- Designing and training a custom **ResNet-based architecture**
-- Applying proper image **normalization**, preprocessing, and data loading
-- Using **GPU-accelerated training** via PyTorch
-- Evaluating performance with metrics suited for multi-label problems (e.g., F1 score)
-
-The primary objective is to build a reliable defect-detection model and experiment with architectural choices, regularization strategies, and data augmentation to improve generalization.
+Each image may contain *zero, one, or multiple* defects, making this a multi-label problem.
 
 ---
 
-##  Dataset
-The dataset contains solar module images showing:
-- Cracks  
-- Inactive regions  
-- Combinations of both  
-- Undamaged panels  
-
-Images come from real solar installations and reflect natural variations such as lighting, degradation, and structure.
-
-This is a **multi-label** problem—each image can belong to multiple defect classes.
+## Features
+- Custom **ResNet-style** model (residual blocks, GAP, sigmoid output)
+- Full PyTorch training pipeline (Adam optimizer, BCE loss, early stopping)
+- Dataset loading, preprocessing, and normalization
+- GPU-compatible implementation
+- Training/validation loss visualization (`losses.png`)
+- Modular and extendable code structure
 
 ---
 
-## Normalization & Preprocessing
+## Dataset & Preprocessing
+- Images resized to **1024 px height**
+- Normalized using dataset-level mean and std:
 
-All images are normalized using dataset-wide statistics:
+\[
+x^\* = \frac{x - \mu}{\sigma}
+\]
 
-$$x^\* = \frac{x - \mu}{\sigma}$$
-
-This ensures compatibility with evaluation environments and stable model training.
-
-Additional preprocessing steps include:
-
-- Resizing images  
-- Data augmentation (flips, rotations, contrast changes)  
-- PyTorch `Dataset` and `DataLoader` setup  
+- Supports optional augmentation through the `Dataset` class
+- Multi-label targets loaded from `data.csv`
 
 ---
 
-##  Model Architecture
-The core model is a **ResNet-style convolutional neural network** implemented from scratch in PyTorch.  
+## Project Structure
+/project/
+│ train.py               # Training script
+│ model.py               # Custom ResNet implementation
+│ trainer.py             # Training loop and early stopping
+│ data.py                # Dataset + preprocessing
+│ data.csv               # Image paths & labels
+│ losses.png             # Training/validation loss curve
+│ README.md              # Documentation
 
-Key features:
-- Residual blocks
-- Global average pooling
-- Multi-label sigmoid output layer
-- Optional dropout and batch normalization
-- Customizable depth and width
+## Training
+
+Install dependencies and run:
+
+\`\`\`bash
+python train.py
+\`\`\`
+
+This will:
+
+- Load and preprocess data  
+- Train the ResNet model  
+- Plot the loss curve  
+- Save training history  
 
 ---
 
-##  Training Pipeline
-The training loop includes:
-- Multi-label loss functions (e.g., BCEWithLogitsLoss)
-- Optimizers (Adam / SGD)
-- Learning rate scheduling
-- Periodic validation
-- Checkpoint saving for best model performance
+## Metrics
 
-The model is evaluated with:
-- Precision  
-- Recall  
-- F1 score (macro/micro)  
-- Per-class metrics  
+Evaluation includes:
+
+- **Precision**
+- **Recall**
+- **F1 (macro & micro)**
+- **Per-class accuracy**
+- **Loss curves and error analysis**
 
 ---
 
-##  Results & Experiments
-Throughout the project, different strategies were explored to improve accuracy and robustness, including:
-- Data augmentation
-- Architectural refinements
+## Results
+
+Experiments explored:
+
+- Data augmentation (flips, rotations, contrast)
 - Regularization (dropout, weight decay)
-- Pretraining vs. training from scratch
+- Changes in CNN depth and width
+- Alternative loss functions (e.g., BCEWithLogitsLoss)
+- Optimizer and learning rate tuning
 
-The best-performing model achieved strong mean F1 scores on validation data.
-
----
+The best-performing configuration achieved stable F1 scores and strong validation performance.

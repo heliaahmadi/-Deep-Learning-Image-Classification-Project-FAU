@@ -32,6 +32,8 @@ x^\* = \frac{x - \mu}{\sigma}
 ---
 
 ## Project Structure
+
+\`\`\`
 /project/
 │ train.py               # Training script
 │ model.py               # Custom ResNet implementation
@@ -40,6 +42,8 @@ x^\* = \frac{x - \mu}{\sigma}
 │ data.csv               # Image paths & labels
 │ losses.png             # Training/validation loss curve
 │ README.md              # Documentation
+\`\`\`
+
 
 ## Training
 

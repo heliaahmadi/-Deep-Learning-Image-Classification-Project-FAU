@@ -22,12 +22,13 @@ Each image may contain *zero, one, or multiple* defects, making this a multi-lab
 - Images resized to **1024 px height**
 - Normalized using dataset-level mean and std:
 
-\[
+$$
 x^\* = \frac{x - \mu}{\sigma}
-\]
+$$
 
 - Supports optional augmentation through the `Dataset` class
 - Multi-label targets loaded from `data.csv`
+
 ---
 
 

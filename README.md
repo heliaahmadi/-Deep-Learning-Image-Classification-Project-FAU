@@ -28,21 +28,7 @@ x^\* = \frac{x - \mu}{\sigma}
 
 - Supports optional augmentation through the `Dataset` class
 - Multi-label targets loaded from `data.csv`
-
 ---
-
-## Project Structure
-
-\`\`\`
-/project/
-│ train.py               # Training script
-│ model.py               # Custom ResNet implementation
-│ trainer.py             # Training loop and early stopping
-│ data.py                # Dataset + preprocessing
-│ data.csv               # Image paths & labels
-│ losses.png             # Training/validation loss curve
-│ README.md              # Documentation
-\`\`\`
 
 
 ## Training
